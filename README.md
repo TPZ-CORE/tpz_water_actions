@@ -11,6 +11,12 @@
 
 2. Add `ensure tpz_water_actions` after the **REQUIREMENTS** in the resources.cfg or server.cfg, depends where your scripts are located.
 
+## Commands
+
+Use `toggleriver` to enable or disable the water action prompts. 
+
+This command is also configurable, it can be found in the configuration file (Config.ToggleRiverActions)
+
 ## Development
 
 You can use and trigger the following event (Client Sided) in order to disable water action prompts when player is fishing.
