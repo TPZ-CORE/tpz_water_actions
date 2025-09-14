@@ -13,7 +13,7 @@
 
 ## Development
 
-- You can use and trigger the following event (Client Sided) in order to disable water action prompts when player is fishing.
+You can use and trigger the following event (Client Sided) in order to disable water action prompts when player is fishing.
 
 ```
 -- @param state : Requires a boolean value (true / false). 
