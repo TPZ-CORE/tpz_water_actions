@@ -19,7 +19,7 @@ end)
 ]]---------------------------------------------------------
 
 local StartWash = function(dict, anim, waterType)
-    
+
     local playerPed = PlayerPedId()
 
     IS_PLAYER_BUSY = true
@@ -42,15 +42,20 @@ local StartWash = function(dict, anim, waterType)
     N_0xe3144b932dfdff65(playerPed, 0.0, -1, 1, 1)
     ClearPedDamageDecalByZone(playerPed, 10, "ALL")
     Citizen.InvokeNative(0x7F5D88333EE8A86F, playerPed, 1)
+    Citizen.InvokeNative(0x9C720776DAA43E7E, playerPed)
 
     ClearPedWetness(playerPed)
 
     if waterType == 'river' or waterType == 'lake' then
-        
-        -- todo (action when washing on a river or a lake)
 
         if Config.tp_dirtsystem.Enabled then 
-            exports.tp_dirtsystem:AddPlayerDirtLevel(Config.tp_dirtsystem.WaterTypes[waterType])
+
+            local current = exports.tp_dirtsystem:GetDirtLevel()
+            local value   = current - Config.tp_dirtsystem.WaterTypes[waterType]
+
+            if value <= 0 then value = 0 end 
+            
+            exports.tp_dirtsystem:SetPlayerDirtLevel(value)
         end
 
     elseif waterType == 'swamp' then
@@ -114,7 +119,7 @@ Citizen.CreateThread(function()
                         StartWash(dict, anim, Config.WaterTypes[Water])
 
                     elseif prompt.type == 'DRINK' then
-
+                   
                         IS_PLAYER_BUSY = true
 
                         local dict = "amb_rest_drunk@world_human_bucket_drink@ground@male_a@idle_a"
@@ -156,6 +161,7 @@ Citizen.CreateThread(function()
                             SetEntityHealth(playerPed, removedHealthValue)
 
                         end
+
 
                     end
 
