@@ -162,6 +162,8 @@ Citizen.CreateThread(function()
 
                         end
 
+                        IS_PLAYER_BUSY = false
+
 
                     end
 
