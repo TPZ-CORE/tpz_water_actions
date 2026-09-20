@@ -60,11 +60,13 @@ local StartWash = function(dict, anim, waterType)
 
     elseif waterType == 'swamp' then
 
-        -- todo (action when washing on a swamp (dirty water) )
-
         if Config.tp_dirtsystem.Enabled then 
             local current = exports.tp_dirtsystem:GetDirtLevel()
-            exports.tp_dirtsystem:SetPlayerDirtLevel(Config.tp_dirtsystem.WaterTypes['swamp'])
+            local value   = current - Config.tp_dirtsystem.WaterTypes['swamp']
+
+            if value <= 0 then value = 0 end 
+            
+            exports.tp_dirtsystem:SetPlayerDirtLevel(value)
         end
 
     end
